@@ -8,7 +8,7 @@ def type_out_text(text):
     for char in text:
         sys.stdout.write(char)
         sys.stdout.flush()
-        time.sleep(0.05)
+        time.sleep(0.04)
     print()
 
 #This is the intro of the game. The player gets asked the name and if they want to here the instructions. 
@@ -116,9 +116,13 @@ To see this message again input 'i'"""
                     if room.name == self.current_room.exits[command]:
                         self.current_room = room
                         break
-            #this is a command that the player is not told about. It is essential to talk to the librarian in order to win. 
+            #this is a command that the player is not told about. It is essential to talk to the librarian in order to win. Unless that is you figure it out on your own. 
             elif command == "talk" and self.current_room.name == "Library":
                 if self.smart:
+                    type_out_text("I see you have discovered the clues...Now the treasure is yours. I am at peace.")
+                    time.sleep(1)
+
+                else:
                     type_out_text("You talk to a librarian who was hiding in the corner.")
                     type_out_text("""'Hello, I am Kurg. I have been a librarian here for many years.I am an expert on potions. 
 I was a good friend to the the great King Magnus.\nI was devastated when he was found dead. 
@@ -126,9 +130,7 @@ So much so that I investigated his death.\nI found some clues but I was never ab
 If you do figure out the solution though, you will be rewarded.\nThe clues are found in the Storeroom.
 There is a hidden trap door there.To go inside it simply input 'trap door' while in the storeroom.'""")
                     time.sleep(2)
-                else:
-                    type_out_text("I see you have discovered the clues...Now the treasure is yours. I am at peace.")
-                    time.sleep(1)
+                    
             #another random unmentioned command.
             elif command == "sleep" and self.current_room.name == "Bedroom":
                 type_out_text("You take a short nap.")
@@ -151,6 +153,7 @@ There is a hidden trap door there.To go inside it simply input 'trap door' while
             elif command == "read" and self.current_room.name == "Graveyard":
                 type_out_text("The sorcerer is the man who murdered the late king Magnus.\nThe only way to defeat him is to use one of his potions.\nBeware of enemies for they are disguised as friends and the will betray you.\nSometimes leaving somebody alive will cost you your life.\nYou will meet a cloaked figure that you must not trust.\nYou will have to take advantage of him in order to survive.\nAfter you purchase a potion, you must end him.")
                 time.sleep(1)
+                self.smart = True
             #These save and load the various things in the game. 
             elif command == "save":
                 with open("save_game.pickle", "wb") as f:
@@ -181,11 +184,11 @@ There is a hidden trap door there.To go inside it simply input 'trap door' while
                 #starting here i have a bunch of different possibilities of items and how you can use them. A lot of them make you die. 
                 if item_name == "key" and "key" in self.inventory and self.current_room.name == "Treasure Room":
                     if self.smart:
-                        type_out_text("You found the treasure with the help of the Librarian Congratulations!\nYou return to Kurg the Librarian and he gives you all of his gold. Cool! Now you get double the reasure... You win!")
+                        type_out_text("You found the treasure with the help of the Librarian's clues...Congratulations!\nYou return to Kurg the Librarian and he gives you all of his gold. Cool! Now you get double the reasure... You win!")
                         break
 
                     else:
-                        type_out_text("You were able to aquire the treasure with out the help of the librarian. Great Job!\nJust so you know, this means that you don't get the reward he promised but you still get the treasure!\nYou WIN!!!!")
+                        type_out_text("You were able to aquire the treasure with out the help of the Librarian's clues. Great Job!\nJust so you know, this means that you don't get the reward he promised but you still get the treasure!\nYou WIN!!!!")
                         break
 
                 elif item_name == "book" and "book" in self.inventory and self.current_room.name == "Library":
