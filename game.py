@@ -2,6 +2,7 @@ import pickle
 import sys
 import time
 import os
+#done
 #to play the game all you have to do is run the file. 
 #This is the loop I use for printing out text and making it look like it is being typed. 
 def type_out_text(text):
