@@ -181,11 +181,11 @@ There is a hidden trap door there.To go inside it simply input 'trap door' while
                 #starting here i have a bunch of different possibilities of items and how you can use them. A lot of them make you die. 
                 if item_name == "key" and "key" in self.inventory and self.current_room.name == "Treasure Room":
                     if self.smart:
-                        type_out_text("You open the treasure chest but nothing is there. You must have missed something.\nHint: Talk to the librarian.")
+                        type_out_text("You found the treasure with the help of the Librarian Congratulations!\nYou return to Kurg the Librarian and he gives you all of his gold. Cool! Now you get double the reasure... You win!")
                         break
 
                     else:
-                        type_out_text("You found the only way to aquire the treasure. Congratulations! You win!")
+                        type_out_text("You were able to aquire the treasure with out the help of the librarian. Great Job!\nJust so you know, this means that you don't get the reward he promised but you still get the treasure!\nYou WIN!!!!")
                         break
 
                 elif item_name == "book" and "book" in self.inventory and self.current_room.name == "Library":
